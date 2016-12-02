@@ -1,0 +1,224 @@
+{% extends "base.html" %}
+{% load utilities_tags %}
+{% load static from staticfiles %}
+
+{% block content %}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Imgur gRabber
+    <small>Version 0.1</small>
+  </h1>
+
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+            <!-- Info boxes -->
+           <div class="row">
+           <div class="col-md-3 col-sm-6 col-xs-12">
+             <div class="info-box bg-purple">
+               <span class="info-box-icon"><i class="fa fa-hand-o-right"></i></span>
+               <div class="info-box-content">
+                 <span class="info-box-text">User Limit</span>
+                 <span class="info-box-number">{{ current_limits|get_item:"UserLimit" }} </span>
+                 <div class="progress">
+                   <div class="progress-bar" style="width: 0%"></div>
+                 </div>
+                 <span class="progress-description">
+                   * users are IP Clients
+                 </span>
+               </div><!-- /.info-box-content -->
+             </div><!-- /.info-box -->
+           </div><!-- /.col -->
+           <div class="col-md-3 col-sm-6 col-xs-12">
+             <div class="info-box bg-purple">
+               <span class="info-box-icon"><i class="fa fa-hand-o-down"></i></span>
+               <div class="info-box-content">
+                 <span class="info-box-text">User Remaining</span>
+                 <span class="info-box-number">{{ current_limits|get_item:"UserRemaining" }} </span>
+                 <div class="progress">
+                   <div class="progress-bar" style="width: 0%"></div>
+                 </div>
+                 <span class="progress-description">
+                   * users are IP Clients
+                 </span>
+               </div><!-- /.info-box-content -->
+             </div><!-- /.info-box -->
+           </div><!-- /.col -->
+           <div class="col-md-3 col-sm-6 col-xs-12">
+             <div class="info-box bg-orange">
+               <span class="info-box-icon"><i class="fa fa-hand-o-right"></i></span>
+               <div class="info-box-content">
+                 <span class="info-box-text">Client Limit</span>
+                 <span class="info-box-number">{{ current_limits|get_item:"ClientLimit" }}</span>
+                 <div class="progress">
+                   <div class="progress-bar" style="width: 0%"></div>
+                 </div>
+                 <span class="progress-description">
+                   * API calls / 24Hrs
+                 </span>
+               </div><!-- /.info-box-content -->
+             </div><!-- /.info-box -->
+           </div><!-- /.col -->
+           <div class="col-md-3 col-sm-6 col-xs-12">
+             <div class="info-box bg-orange">
+               <span class="info-box-icon"><i class="fa fa-hand-o-down"></i></span>
+               <div class="info-box-content">
+                 <span class="info-box-text">Client Remaining</span>
+                 <span class="info-box-number">{{ current_limits|get_item:"ClientRemaining" }}</span>
+                 <div class="progress">
+                   <div class="progress-bar" style="width: 0%"></div>
+                 </div>
+                 <span class="progress-description">
+                   * API calls / 24Hrs
+                 </span>
+               </div><!-- /.info-box-content -->
+             </div><!-- /.info-box -->
+           </div><!-- /.col -->
+           </div><!-- /.row -->
+
+
+           <div class="row">
+           <div class="col-md-12 col-sm-6 col-xs-12">
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Section: <b>{{ section }}</b> Sort: <b>{{ sort }}</b> Page: <b>{{ page }}</b> </h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+
+                  <table id="images_table" class="table table-bordered table-hover" width="100%">
+                    <thead>
+                      <tr>
+                        <th>Thumbnail</th>
+                        <th>Stats</th>
+                        <th>Post Title </th>
+                        <th>Views</th>
+                        <th>Points</th>
+
+
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in items %}
+
+                        <tr>
+                            <form method="POST" id="post_form_{{ item.id }}">{% csrf_token %}
+                                {% if item.is_album == False %}
+                                        <td><img src='{{ item.link }}' width="250"></td>
+                                        <td>Post Type: <b>IMAGE</b>
+                                            Direct Link: <a href="{{ item.link }}">{{ item.link}}</a><br/>
+                                            Section: {{ item.section}}<br/>
+                                            NSFW: {{ item.nsfw}}<br/>
+                                            Animated: {{ item.animated}}<br/>
+                                            MP4: <a href="{{ item.mp4 }}">{{ item.mp4}}</a><br/>
+                                            <button type="submit" class="btn btn-primary" value="POST">Save</button>
+                                        </td>
+
+                                        <td><b>Title:</b>{{  item.title }} <br />
+                                            ImageID<input id="image_id" maxlength="50" name="image_id" type="text" value="{{ item.id }}"></input><br />
+                                            Description<input type="text" name="description" maxlength="10000" size="20" id="description" value="{{ item.title }}"></input><br />
+                                            URL<input type="text" name="url" maxlength="100" size="35" id="url" value="{{ item.link }}"></input><br />
+                                            Size: {{ item.size|bytes_to_megabytes }} Mb
+                                            <ul id="response_post_form_{{ item.id }}" class="list-unstyled">
+                                            </ul>
+                                        </td>
+                                        <td>{{  item.views }}</td>
+                                        <td>{{  item.points }}</td>
+
+                                {% else %}
+                                    <td>
+                                        {% for image in album_images|get_item:item.id %}
+                                            <!-- Only print 5 images -->
+                                            {% if forloop.counter < 2 %}
+                                                    <img src='{{ image.link }}' width="250"><br />
+                                            {% endif %}
+                                        {% endfor %}
+                                    </td>
+                                    <td>Post Type: <b>ALBUM</b>
+                                        Images Count: {{ item.images_count }} <br/>
+                                        Direct Link: <a href="{{ item.link }}">{{ item.link}}</a><br/>
+                                        NSFW: {{ item.nsfw}}<br/>
+                                        <button type="submit" class="btn btn-primary" value="POST">Save</button>
+                                        <ul id="response_post_form_{{ item.id }}"  class="list-unstyled">
+                                        </ul>
+                                    </td>
+
+                                    <td><b>Title:</b>{{  item.title }}<br />
+                                        {% for image in album_images|get_item:item.id %}
+                                            <!-- Only print 1 image -->
+                                            {% if forloop.counter == 1 %}
+                                            ImageID<input id="image_id" maxlength="50" name="image_id" type="text" value="{{ image.id }}"></input><br />
+                                            Description<input type="text" name="description" maxlength="10000" size="20" id="description" value="{{ item.title }}"></input><br />
+                                            URL<input type="text" name="url" maxlength="100" size="35" id="url" value="{{ image.link }}"></input><br />
+                                            Size: {{ image.size|bytes_to_megabytes }} Mb
+                                            {% endif%}
+
+                                        {% endfor %}
+
+                                    </td>
+                                    <td>{{  item.views }}</td>
+                                    <td>{{  item.points }}</td>
+
+                                {% endif%}
+
+                            </form>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>Thumbnail</th>
+                        <th>Stats</th>
+                        <th>Views</th>
+                        <th>Points</th>
+                        <th>Post Title</th>
+
+
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+          </div><!-- /.col -->
+          </div><!-- /.row -->
+
+
+</section><!-- /.content -->
+{% endblock %}
+
+{% block postscript %}
+<!-- responsive extension css -->
+<link href="{% static "webapp/plugins/datatables/extensions/Responsive/css/dataTables.responsive.css" %}" rel="stylesheet" type="text/css" />
+<!-- responsive extension js -->
+<script src="{% static "webapp/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js" %}" type="text/javascript"></script>
+<script src="{% static "webapp/dist/js/ajax.js" %}" type="text/javascript"></script>
+
+
+    <script type="text/javascript">
+      $(function () {
+        // $("#accounts_table").DataTable();
+        $('#images_table').DataTable({
+          "paging": false,
+          "lengthChange": false,
+          "searching": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
+        });
+        //
+        // $('#form_post').on('submit', function(event){
+        //     event.preventDefault();
+        //     console.log("form submitted!")  // sanity check
+        //     create_post();
+        // });
+
+
+
+      });
+    </script>
+{% endblock %}

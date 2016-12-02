@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static from staticfiles %}
+
+{% block content %}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    Grabber DATA
+  </h1>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title"> All pending data to be grabbed</h3>
+      </div><!-- /.box-header -->
+      <div class="box-body">
+
+          <div class="row white">
+            <div class="columns large-12">
+                <form method="POST" id="post-form1">
+                    {% csrf_token %}
+                    <div class="fieldWrapper" id="the_post">
+                        ImageID<input id="image_id" maxlength="50"  name="image_id" type="text" value=""></input>
+                        Description<input type="text" name="description" maxlength="10000" id="id_description" value=""></input>
+                        URL<input type="text" name="url" maxlength="100" id="id_url" value=""></input>
+                    </div>
+                    <div id="results"></div>
+                    <input type="submit" value="Post">
+                </form>
+
+            </div>
+        </div>
+        <ul id="talk">
+        </ul>
+        <table id="images_table" class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>ImageId</th>
+              <th>Description</th>
+              <th>Url</th>
+              <th>Downloaded </th>
+              <th>Time Added</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for item in grabber_data %}
+              <tr>
+                  <td><img src='{{ item.url }}' width="250"></td>
+                  <td>{{ item.description }}</td>
+                  <td>{{ item.url }}</td>
+                  <td>{{ item.downloaded }} </td>
+                  <td>{{ item.time_added }} </td>
+              </tr>
+          {% endfor %}
+
+          </tbody>
+          <tfoot>
+            <tr>
+                <th>ImageId</th>
+                <th>Description</th>
+                <th>Url</th>
+                <th>Downloaded </th>
+                <th>Time Added</th>
+            </tr>
+          </tfoot>
+        </table>
+      </div><!-- /.box-body -->
+    </div><!-- /.box -->
+</section>
+
+{% endblock %}
+
+{% block postscript %}
+<script src="{% static "webapp/dist/js/ajax.js" %}" type="text/javascript"></script>
+{% endblock %}
