@@ -3,7 +3,7 @@ cache:
     - wheeldir
 
 build:
-  image: python:2.7-alpine
+  image: python:2.7
   commands:
     - cd picsgrabber_src
     - pip install --upgrade pip setuptools wheel
