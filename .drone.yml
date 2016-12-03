@@ -1,6 +1,22 @@
 build:
   image: python:2.7
+  environment:
+    - DB_ENV_DB=picsgrabber
+    - DB_ENV_USER=picsgrabber_user
+    - DB_ENV_PASSWORD=picsgrabber_password
+    - DB_HOST=localhost
+    - DB_PORT=3306
   commands:
     - cd picsgrabber_src
     - pip install --upgrade pip setuptools wheel
     - pip install -r requirements.txt
+    - python manage.py makemigrations
+    - python manage.py migrate
+compose:
+  database:
+    image: mysql:5.6
+    environment:
+      - MYSQL_ROOT_PASSWORD=root-password
+      - MYSQL_DATABASE=picsgrabber
+      - MYSQL_USER=picsgrabber_user
+      - MYSQL_PASSWORD=picsgrabber_password
