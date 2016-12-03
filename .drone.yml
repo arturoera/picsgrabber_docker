@@ -1,17 +1,6 @@
-cache:
-  mount:
-    - wheeldir
-
 build:
   image: python:2.7
   commands:
     - cd picsgrabber_src
     - pip install --upgrade pip setuptools wheel
-    - pip wheel -r requirements.txt --wheel-dir=wheeldir --find-links=wheeldir
-    - pip wheel -r test-requirements.txt --wheel-dir=wheeldir --find-links=wheeldir
-    - pip install --use-wheel --no-index --find-links=wheeldir -r requirements.txt
-    - pip install --use-wheel --no-index --find-links=wheeldir -r test-requirements.txt
-    - python setup.py install
-    - flake8 dronedemo
-    - mkdir -p coverage
-    - nosetests -v tests/
+    - pip install -r requirements.txt
