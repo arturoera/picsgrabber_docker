@@ -10,8 +10,10 @@ build:
     - cd picsgrabber_src
     - pip install --upgrade pip setuptools wheel
     - pip install -r requirements.txt
+    - echo $DB_ENV_DB
     - python manage.py makemigrations
     - python manage.py migrate
+
 compose:
   database:
     image: mysql:5.6
