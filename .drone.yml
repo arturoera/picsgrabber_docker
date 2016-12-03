@@ -4,7 +4,7 @@ build:
     - DB_ENV_DB=picsgrabber
     - DB_ENV_USER=picsgrabber_user
     - DB_ENV_PASSWORD=picsgrabber_password
-    - DB_HOST=localhost
+    - DB_HOST=127.0.0.1
     - DB_PORT=3306
   commands:
     - cd picsgrabber_src
