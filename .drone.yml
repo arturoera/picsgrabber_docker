@@ -13,7 +13,6 @@ build:
     - python manage.py makemigrations
     - python manage.py migrate
     - python manage.py test
-    - echo $DB_ENV_PASSWORD
 
 compose:
   database:
@@ -23,3 +22,12 @@ compose:
       - MYSQL_DATABASE=picsgrabber
       - MYSQL_USER=picsgrabber_user
       - MYSQL_PASSWORD=picsgrabber_password
+publish:
+  docker:
+    username: $$DOCKER_USERNAME
+    password: $$DOCKER_PASS
+    email: $$DOCKER_EMAIL
+    repo: arturoochoa/picsgrabber
+    tag: $$TAG
+    when:
+      event: tag
