@@ -32,6 +32,7 @@ publish:
     password: $$DOCKER_PASS
     email: $$DOCKER_EMAIL
     repo: arturoochoa/picsgrabber
+    storage_driver: overlay
     tag: $$TAG
     when:
       event: tag
