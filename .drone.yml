@@ -24,6 +24,8 @@ compose:
       - MYSQL_PASSWORD=picsgrabber_password
 publish:
   docker:
+    environment:
+      - DOCKER_LAUNCH_DEBUG=true
     username: $$DOCKER_USERNAME
     password: $$DOCKER_PASS
     email: $$DOCKER_EMAIL
