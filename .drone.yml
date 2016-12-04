@@ -23,6 +23,7 @@ compose:
       - MYSQL_DATABASE=picsgrabber
       - MYSQL_USER=picsgrabber_user
       - MYSQL_PASSWORD=picsgrabber_password
+
 publish:
   docker:
     environment:
