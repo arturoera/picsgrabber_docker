@@ -17,7 +17,8 @@ PROJECT_ROOT = dirname(DJANGO_ROOT)
 SITE_NAME = basename(DJANGO_ROOT)
 
 # Collect static files here
-STATIC_ROOT = join(PROJECT_ROOT, 'run', 'static')
+# STATIC_ROOT = join(PROJECT_ROOT, 'run', 'static')
+STATIC_ROOT = '/static'
 
 # Collect media files here
 MEDIA_ROOT = join(PROJECT_ROOT, 'run', 'media')
