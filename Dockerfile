@@ -33,7 +33,7 @@ RUN mkdir /logs
 RUN mkdir /logs/nginx
 RUN mkdir /logs/gunicorn
 WORKDIR /code
-RUN pip install -r picsgrabber/requirements.txt
+RUN pip install -r picsgrabber_src/requirements.txt
 RUN chmod ug+x /code/docker_files/initialize.sh
 
 # Expose ports
