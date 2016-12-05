@@ -38,8 +38,8 @@ notify:
   slack:
     webhook_url: https://hooks.slack.com/services/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
     channel: '#general'
-    username: drone
+    username: Sky-Gal
     template: >
-      build #{{ build.number }} Hey my machetes your build just finished {{ build.status }} status
+      build #{{ build.number }} Hey my machetes your build just finished with a {{ build.status }} status
     
     
