@@ -1,6 +1,4 @@
-[![Build Status](http://23.253.102.30/api/badges/arturoera/picsgrabber_docker/status.svg)](http://23.253.102.30/arturoera/picsgrabber_docker)
-
-[![Docker Automated buil](https://img.shields.io/docker/automated/arturoera/picsgrabber_docker.svg)]()
+[![Build Status](http://23.253.102.30/api/badges/arturoera/picsgrabber_docker/status.svg)](http://23.253.102.30/arturoera/picsgrabber_docker) [![Docker Automated buil](https://img.shields.io/docker/automated/arturoera/picsgrabber_docker.svg)]()
 
 Pics Grabber
 =======================
