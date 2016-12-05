@@ -1,3 +1,5 @@
+[![Build Status](http://23.253.102.30/api/badges/arturoera/picsgrabber_docker/status.svg)](http://23.253.102.30/arturoera/picsgrabber_docker)
+
 Pics Grabber
 =======================
 
