@@ -1,4 +1,5 @@
 FROM python:2.7
+MAINTAINER Arturo Ochoa <arturo.era@gmail.com>
 
 # Enable production settings by default; for development, this can be set to
 # `false` in `docker run --env`
