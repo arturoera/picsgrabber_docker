@@ -40,6 +40,6 @@ notify:
     channel: general
     username: drone
     template: >
-      build #{{ build.number }} hey my machetes your build just finished {{ build.status }} status
+      build #{{ build.number }} Hey my machetes your build just finished {{ build.status }} status
     
     
