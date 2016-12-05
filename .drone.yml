@@ -33,4 +33,3 @@ publish:
     email: $$DOCKER_EMAIL
     repo: arturoochoa/picsgrabber
     storage_driver: overlay
-    tag: $$TAG
