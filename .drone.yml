@@ -33,3 +33,13 @@ publish:
     email: $$DOCKER_EMAIL
     repo: arturoochoa/picsgrabber
     storage_driver: overlay
+
+notify:
+  slack:
+    webhook_url: https://hooks.slack.com/services/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
+    channel: '#general'
+    username: drone
+    template: >
+      build #{{ build.number }} Hey my machetes your build just finished {{ build.status }} status
+    
+    
