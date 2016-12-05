@@ -27,12 +27,10 @@ compose:
 publish:
   docker:
     environment:
-      - DOCKER_LAUNCH_DEBUG=true
+          - DOCKER_LAUNCH_DEBUG=true
     username: $$DOCKER_USERNAME
     password: $$DOCKER_PASS
     email: $$DOCKER_EMAIL
     repo: arturoochoa/picsgrabber
     storage_driver: overlay
     tag: $$TAG
-    when:
-      event: tag
