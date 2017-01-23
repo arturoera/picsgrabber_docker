@@ -33,6 +33,11 @@ publish:
     email: $$DOCKER_EMAIL
     repo: arturoochoa/picsgrabber
     storage_driver: overlay
+    tag:
+      - production
+      - "$$BUILD_NUMBER"
+    when:
+      branch: master
 
 notify:
   slack:
@@ -41,5 +46,3 @@ notify:
     username: Sky-Gal
     template: >
       build #{{ build.number }} Hey my machetes your build just finished with a {{ build.status }} status
-    
-    
