@@ -12,8 +12,9 @@ podTemplate(label: 'mypod',
                 git 'https://github.com/arturoera/picsgrabber_docker.git'
             }
             stage("Build Container"){
+                sh 'export DOCKER_API_VERSION=1.23'
                 sh 'docker --version'
-                // sh 'docker build .'
+                sh 'docker build .'
             }
         }
 
