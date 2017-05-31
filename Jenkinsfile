@@ -19,7 +19,7 @@ podTemplate(label: 'mypod',
             stage("Build Container"){
                 docker.withRegistry("https://registry.ptracker.rackspace.com"){
                     def img = docker.image("picsgrabber")
-                    sh 'docker build .'
+                    sh 'docker build -t picsgrabber .'
                     img.push()
                     // def serverImage = docker.build("picsgrabber_tag")
                     // serverImage.push()
