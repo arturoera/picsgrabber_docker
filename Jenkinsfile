@@ -5,11 +5,14 @@ podTemplate(label: 'mypod',
   ) {
 
     node('mypod') {
+        def app
 
         container('docker'){
             stage("Clone Repository"){
                 git 'https://github.com/arturoera/picsgrabber_docker.git'
-                sh 'ls -la'
+            }
+            stage("Build Container"){
+                app = docker.build(".")
             }
         }
 
