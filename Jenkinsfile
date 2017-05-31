@@ -9,7 +9,7 @@ podTemplate(label: 'mypod',
         container('docker'){
             stage("Clone Repository"){
                 git 'https://github.com/arturoera/picsgrabber_docker.git'
-                sh 'ls -la /'
+                sh 'ls -la'
             }
         }
 
