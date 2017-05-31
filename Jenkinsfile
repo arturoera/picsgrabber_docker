@@ -13,7 +13,7 @@ podTemplate(label: 'mypod',
             }
             stage("Build Container"){
                 sh 'docker version'
-                // sh 'docker build .'
+                sh 'docker build .'
             }
         }
 
