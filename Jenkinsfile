@@ -12,7 +12,7 @@ podTemplate(label: 'mypod',
                 git 'https://github.com/arturoera/picsgrabber_docker.git'
             }
             stage("Build Container"){
-                app = docker.build()
+                app = docker.build("")
             }
         }
 
