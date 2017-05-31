@@ -1,6 +1,6 @@
 #!groovy
 podTemplate(label: 'mypod',
-            containers: [containerTemplate(name: 'docker', image: 'docker:1.11-git', ttyEnabled: true, command: 'cat')],
+            containers: [containerTemplate(name: 'docker', image: 'docker:1.12.6', ttyEnabled: true, command: 'cat')],
             volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
   ) {
 
@@ -11,15 +11,28 @@ podTemplate(label: 'mypod',
             stage("Clone Repository"){
                 git 'https://github.com/arturoera/picsgrabber_docker.git'
             }
-            stage("Build Container"){
-                sh 'docker version'
-                sh 'docker build .'
+
+            stage("Configure Registry"){
+                println "Configure the internal docker registry"
+                sh "echo \"10.10.159.25    registry.ptracker.rackspace.com\" >> /etc/hosts"
+                sh "docker pull registry.ptracker.rackspace.com/ubuntu"
             }
+            // stage("Build Container"){
+            //     sh 'docker version'
+            //     sh 'docker build .'
+            // }
         }
 
 
     }
 }
+
+
+
+
+
+
+
 // #!groovy
 //
 // String GIT_VERSION
