@@ -88,7 +88,7 @@ podTemplate(label: 'mypod', containers: [
   //     sh "sample-client/target/universal/stage/bin/demo-client ${devAddress}"
   //   }
   // }
-}
+// }
 
 // stage 'Deploy to LIVE'
 //   timeout(time:2, unit:'DAYS') {
