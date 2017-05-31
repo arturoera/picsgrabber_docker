@@ -15,12 +15,19 @@ podTemplate(label: 'mypod',
             stage("Configure Registry"){
                 println "Configure the internal docker registry"
                 sh "echo \"10.10.159.25    registry.ptracker.rackspace.com\" >> /etc/hosts"
-                sh "docker pull registry.ptracker.rackspace.com/ubuntu"
             }
-            // stage("Build Container"){
-            //     sh 'docker version'
-            //     sh 'docker build .'
-            // }
+            stage("Build Container"){
+                docker.withRegistry("https://registry.ptracker.rackspace.com"){
+                    // def img = docker.image("picsgrabber_docker")
+                    // sh 'docker build .'
+                    // img.push
+                    def serverImage = docker.build("picsgrabber_tag")
+                    serverImage.push()
+                }
+
+
+
+            }
         }
 
 
