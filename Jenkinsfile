@@ -12,7 +12,7 @@ podTemplate(label: 'mypod',
                 git 'https://github.com/arturoera/picsgrabber_docker.git'
             }
             stage("Build Container"){
-                sh 'docker-machine version'
+                sh 'docker version'
                 // sh 'docker build .'
             }
         }
