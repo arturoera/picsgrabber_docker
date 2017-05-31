@@ -3,7 +3,7 @@
 String GIT_VERSION
 
 node {
-
+    def app
   // def buildEnv
   // def devAddress
 
@@ -11,9 +11,10 @@ node {
     checkout scm
   }
 
-  // stage ('Build Custom Environment') {
-  //   buildEnv = docker.build("build_env:${GIT_VERSION}", 'custom-build-env')
-  // }
+  stage ('Build Image') {
+    // buildEnv = docker.build("build_env:${GIT_VERSION}", 'custom-build-env')
+    app = docker.build("/")
+  }
   //
   // buildEnv.inside {
   //
