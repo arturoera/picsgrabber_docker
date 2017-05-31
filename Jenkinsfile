@@ -7,13 +7,8 @@ node {
   // def buildEnv
   // def devAddress
 
-  stage ('Checkout') {
-    deleteDir()
+  stage ('Clone Repository') {
     checkout scm
-    GIT_VERSION = sh (
-      script: 'git describe --tags',
-      returnStdout: true
-    ).trim()
   }
 
   // stage ('Build Custom Environment') {
