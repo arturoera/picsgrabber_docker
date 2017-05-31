@@ -12,8 +12,8 @@ podTemplate(label: 'mypod',
                 git 'https://github.com/arturoera/picsgrabber_docker.git'
             }
             stage("Build Container"){
-                sh 'ls -la'
-                sh 'docker build .'
+                sh 'docker --version'
+                // sh 'docker build .'
             }
         }
 
